@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Portfolio | MERR Surabaya</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+:root{
+    --primary:#00F5FF;
+    --secondary:#6D5DFB;
+    --dark:#050b14;
+    --dark-lighter:#0d1b2a;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Plus Jakarta Sans', sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 245, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(109, 93, 251, 0.05) 0%, transparent 50%),
+        #050b14;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* NAVBAR UPGRADE */
+.navbar{
+    width:100%;
+    padding:20px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:999;
+    backdrop-filter:blur(20px);
+    background:rgba(5, 11, 20, 0.7);
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-0.5px;
+}
+
+.logo span{
+    color:var(--primary);
+    text-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#94a3b8;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--primary);
+}
+
+/* SECTION GLOBAL */
+section{
+    padding:140px 8% 80px;
+}
+
+/* HERO */
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:60px;
+    align-items:center;
+}
+
+.tag{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:4px;
+    background:rgba(0,245,255,.1);
+    border-left:3px solid var(--primary);
+    color:var(--primary);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing: 1.5px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:68px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom:25px;
+    letter-spacing:-2px;
+    background: linear-gradient(to right, #fff 60%, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p{
+    color:#94a3b8;
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+.hero-image{
+    height:580px;
+    border-radius:40px;
+    background:url('img/tanah-utama.jpg') center/cover no-repeat;
+    position:relative;
+    border: 1px solid var(--border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* MAP STYLING */
+.map-box {
+    width: 100%;
+    height: 450px;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin-top: 40px;
+}
+
+/* CARDS */
+.section-title{
+    font-size:42px;
+    font-weight: 700;
+    margin-bottom:20px;
+    letter-spacing:-1px;
+}
+
+.section-desc{
+    color:#94a3b8;
+    line-height:1.8;
+    margin-bottom:50px;
+    font-size:18px;
+    max-width: 800px;
+}
+
+.doc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.doc-card{
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 10px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor:pointer;
+}
+
+.doc-card:hover{
+    transform: translateY(-12px);
+    border-color: var(--primary);
+    background: rgba(0, 245, 255, 0.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.doc-preview{
+    width:100%;
+    height:380px;
+    object-fit:cover;
+    border-radius: 22px;
+    margin-bottom: 20px;
+}
+
+.doc-content{
+    padding:15px 15px 25px;
+}
+
+.doc-content h3{
+    font-size:22px;
+    font-weight: 700;
+    margin-bottom:12px;
+}
+
+.doc-content p{
+    color:#94a3b8;
+    line-height:1.6;
+    margin-bottom:20px;
+    font-size: 15px;
+}
+
+.open-btn{
+    display:block;
+    width: 100%;
+    text-align: center;
+    padding:14px;
+    border-radius:15px;
+    background: rgba(255,255,255,0.05);
+    border:1px solid var(--border);
+    color:white;
+    font-size:14px;
+    font-weight:600;
+    transition: .3s;
+}
+
+.doc-card:hover .open-btn{
+    background: var(--primary);
+    color: var(--dark);
+    border-color: var(--primary);
+}
+
+/* CONTACT BOX */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.contact-box{
+    padding:50px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+    border: 1px solid var(--border);
+    border-radius: 35px;
+}
+
+.contact-item{
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-item:last-child { border: none; }
+
+.contact-label {
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.contact-value {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* FOOTER */
+footer{
+    padding:60px 8%;
+    border-top:1px solid var(--border);
+    text-align:center;
+    color:#64748b;
+    font-size:13px;
+    letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+    .hero-grid, .contact-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:48px; }
+    .nav-links{ display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">MERR<span>PORTFOLIO</span></div>
+    <div class="nav-links">
+        <a href="#summary">Executive Summary</a>
+        <a href="#location">Location</a>
+        <a href="#legal">Legal</a>
+        <a href="#protection">Protection</a>
+        <a href="#contact">Contact</a>
+    </div>
+</div>
+
+<section class="hero">
+    <div class="hero-grid">
+        <div>
+            <div class="tag">PREMIUM INVESTOR DECK</div>
+            <h1>Investasi Lahan Strategis MERR Surabaya</h1>
+            <p>
+                Ini bukan sekadar pembelian lahan, melainkan pengambilalihan
+                aset premium dengan kekuatan hukum yang lengkap, perlindungan
+                negara, dan potensi pengembangan bernilai tinggi.
+                Seluruh dokumen telah tersusun sebagai Legal Audit File yang
+                siap untuk due diligence investor serius.
+            </p>
+            <div class="flex gap-4">
+                <a href="#contact" class="px-8 py-4 bg-cyan-500 text-black font-bold rounded-xl hover:bg-white transition-all">Hubungi Kami</a>
+                <a href="#legal" class="px-8 py-4 border border-white/20 rounded-xl hover:bg-white/10 transition-all">Lihat Dokumen</a>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </div>
+</section>
+
+<section id="summary">
+    <div class="tag">EXECUTIVE SUMMARY</div>
+    <h2 class="section-title">Legal Audit File yang Kuat</h2>
+    <p class="section-desc">
+        Data yang dimiliki bukan sekadar kumpulan dokumen, melainkan sebuah
+        rangkaian bukti hukum yang saling terhubung mulai dari putusan pengadilan,
+        proses eksekusi resmi, perlindungan institusional negara, validitas transaksi,
+        hingga finalisasi administratif di BPN dan Bapenda.
+        Ini yang menjadikan aset ini sangat layak untuk investor besar.
+    </p>
+</section>
+
+<section id="location" style="background: rgba(0,245,255,0.02)">
+    <div class="tag">VISUALISASI LOKASI</div>
+    <h2 class="section-title">Posisi Strategis Aset</h2>
+    <p class="section-desc">Visualisasi area MERR (Middle East Ring Road) Surabaya. Titik pusat pertumbuhan ekonomi baru dengan aksesibilitas terbaik ke gerbang tol dan pusat bisnis.</p>
+    
+    <div class="map-box">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15830.123456789!2d112.7825!3d-7.3125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fb0000000000%3A0x0!2zN8KwMTgnNDUuMCJTIDExMsKwNDYnNTcuMCJF!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid" 
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+    </div>
+</section>
+
+<section id="legal">
+    <div class="tag">FONDASI HUKUM</div>
+    <h2 class="section-title">Dokumen Inti Investasi</h2>
+    <p class="section-desc">Berikut adalah berkas hukum utama yang menjamin keamanan investasi Anda.</p>
+
+    <div class="doc-grid">
+        <div class="doc-card" onclick="openPDF('pdf/putusan-pn.pdf')">
+            <img src="preview/putusan-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Putusan PN Surabaya</h3>
+                <p>Putusan PN No. 728/Pdt.G/2018 dengan status Inkracht. Hak telah diakui negara secara final dan memiliki kepastian hukum maksimal.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+
+        <div class="doc-card" onclick="openPDF('pdf/amaning.pdf')">
+            <img src="preview/amaning-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Penetapan Amaning</h3>
+                <p>Penetapan No. 43.EKS.2019 membuktikan proses pengosongan lahan berjalan secara resmi melalui pengadilan.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="protection">
+    <div class="tag">PROTEKSI NEGARA</div>
+    <h2 class="section-title">Pengawasan dan Perlindungan Institusional</h2>
+
+    <div class="doc-grid">
+        <div class="doc-card" onclick="openPDF('pdf/dukungan-polri.pdf')">
+            <img src="preview/polri-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Mahkamah Agung & Mabes Polri</h3>
+                <p>Dukungan institusional dari MA dan Mabes Polri menjadi lapisan perlindungan penting terhadap risiko mafia tanah dan gangguan pihak luar.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+
+        <div class="doc-card" onclick="openPDF('pdf/ijb.pdf')">
+            <img src="preview/ijb-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>IJB & Validitas Transaksi</h3>
+                <p>Perikatan jual beli notariil memperkuat legal standing, profesionalisme transaksi, dan kesiapan due diligence investor.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+
+        <div class="doc-card" onclick="openPDF('pdf/bapenda.pdf')">
+            <img src="preview/bapenda-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Bapenda & Administrasi</h3>
+                <p>Progres administrasi perpajakan dan validasi tambahan berjalan lancar sebagai bentuk transparansi penuh.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+
+        <div class="doc-card" onclick="openPDF('pdf/bpn.pdf')">
+            <img src="preview/bpn-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Finalisasi BPN</h3>
+                <p>Tahap validasi batas lahan dan sertifikasi formal sedang berjalan, meningkatkan nilai komersial aset secara signifikan.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="tag">CONTACT PERSON</div>
+    <h2 class="section-title">Diskusi Strategis & Due Diligence</h2>
+    <p class="section-desc">
+        Untuk verifikasi dokumen asli, site visit, pembahasan joint venture,
+        akuisisi strategis, maupun kerja sama investasi jangka panjang,
+        silakan menghubungi contact person berikut.
+    </p>
+
+    <div class="contact-grid">
+        <div class="contact-box">
+            <div class="contact-item">
+                <span class="contact-label">Nama</span>
+                <span class="contact-value">BP WAWAN</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-value">
+                    <a href="https://wa.me/628131002232" target="_blank" style="color:var(--primary)">+62 813-1002-232</a>
+                </span>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <div class="contact-item">
+                <span class="contact-label">Nama</span>
+                <span class="contact-value">BP FAKHRUDIN</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-value">
+                    <a href="https://wa.me/6281239746692" target="_blank" style="color:var(--primary)">+62 812-3974-6692</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-10 p-6 text-center border border-dashed border-white/20 rounded-2xl">
+        <p class="text-slate-400"><strong>Keterangan:</strong> Serious Investor Only</p>
+    </div>
+</section>
+
+<footer>
+    CONFIDENTIAL INVESTOR DECK • Legal Audit File • MERR Surabaya | By AMDF
+</footer>
+
+<script>
+function openPDF(path){
+    window.open(path, "_blank");
+}
+</script>
+
+</body>
+</html>
