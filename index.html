@@ -66,6 +66,18 @@
             overflow-x: hidden;
         }
 
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .theme-switch {
             position: fixed; bottom: 30px; right: 30px; z-index: 1000;
             width: 55px; height: 55px; border-radius: 50%;
@@ -113,7 +125,6 @@
 
         .hero-image {
             height: 580px; border-radius: 40px;
-            /* Pastikan file ini ada di folder img/ */
             background: url('img/tanah-utama.jpg') center/cover no-repeat;
             position: relative; border: 1px solid var(--border);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -128,6 +139,7 @@
         .doc-card {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 30px; padding: 10px; cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden;
         }
         .doc-card:hover { transform: translateY(-12px); border-color: var(--primary); }
         .doc-preview { width: 100%; height: 380px; object-fit: cover; border-radius: 22px; margin-bottom: 20px; }
@@ -150,7 +162,7 @@
         }
 
         .contact-box { 
-            padding: 30px;
+            padding: 30px; 
             background: var(--bg-card); 
             border: 1px solid var(--border); 
             border-radius: 25px; 
@@ -160,10 +172,10 @@
             padding: 15px 0; 
             border-bottom: 1px solid var(--border); 
             display: flex; 
-            flex-wrap: wrap;
+            flex-wrap: wrap; 
             justify-content: space-between; 
             align-items: center;
-            gap: 10px;
+            gap: 10px; 
         }
 
         @media (max-width: 480px) {
@@ -183,6 +195,7 @@
 
         footer { padding: 60px 8%; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 13px; letter-spacing: 1px; }
 
+        /* RESPONSIVE */
         @media(max-width:1024px) {
             .hero-grid { grid-template-columns: 1fr; gap: 40px; }
             .contact-grid { grid-template-columns: 1fr; }
@@ -239,7 +252,7 @@
 
 <section class="hero">
     <div class="hero-grid">
-        <div>
+        <div class="reveal">
             <div class="tag">PREMIUM INVESTOR DECK</div>
             <h1>Investasi Lahan Strategis MERR Surabaya</h1>
             <p>
@@ -250,11 +263,11 @@
                 <a href="#legal" class="px-8 py-4 border border-gray-400 rounded-xl hover:bg-gray-100/10 transition-all">Lihat Dokumen</a>
             </div>
         </div>
-        <div class="hero-image"></div>
+        <div class="hero-image reveal"></div>
     </div>
 </section>
 
-<section id="summary">
+<section id="summary" class="reveal">
     <div class="tag">EXECUTIVE SUMMARY</div>
     <h2 class="section-title">Legal Audit File yang Kuat</h2>
     <p class="section-desc">
@@ -265,32 +278,35 @@
     </p>
 </section>
 
-<section id="location" style="background: var(--gradient-1)">
+<section id="location" style="background: var(--gradient-1)" class="reveal">
     <div class="tag">VISUALISASI LOKASI</div>
     <h2 class="section-title">Posisi Strategis Aset</h2>
-    <p class="section-desc">Visualisasi area MERR Surabaya. Titik pusat pertumbuhan ekonomi baru dengan aksesibilitas terbaik.</p>
+    <p class="section-desc">Visualisasi area MERR (Middle East Ring Road) Surabaya. Titik pusat pertumbuhan ekonomi baru.</p>
     <div class="map-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15830.29744160411!2d112.7818301!3d-7.2891157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f99999999999%3A0x8888888888888888!2sMERR%20Surabaya!5e0!3m2!1sid!2sid!4v1234567890" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5!2d112.78!3d-7.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTgnMDAuMCJTIDExMsKwNDYnNDguMCJF!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 </section>
 
 <section id="legal">
-    <div class="tag">FONDASI HUKUM</div>
-    <h2 class="section-title">Dokumen Inti Investasi</h2>
+    <div class="tag reveal">FONDASI HUKUM</div>
+    <h2 class="section-title reveal">Dokumen Inti Investasi</h2>
+    <p class="section-desc reveal">Klik pada kartu untuk membuka berkas PDF asli.</p>
+
     <div class="doc-grid">
-        <div class="doc-card" onclick="openPDF('pdf/putusan-pn.pdf')">
-            <img src="preview/putusan-preview.jpg" alt="Preview Putusan PN" class="doc-preview">
+        <div class="doc-card reveal" onclick="openPDF('pdf/putusan-pn.pdf')">
+            <img src="preview/putusan-preview.jpg" class="doc-preview" alt="Preview Putusan PN">
             <div class="doc-content">
                 <h3>Putusan PN Surabaya</h3>
-                <p>Putusan PN No. 728/Pdt.G/2018 dengan status Inkracht.</p>
+                <p>Putusan PN No. 728/Pdt.G/2018 dengan status Inkracht. Hak telah diakui negara secara final.</p>
                 <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
-        <div class="doc-card" onclick="openPDF('pdf/amaning.pdf')">
-            <img src="preview/amaning-preview.jpg" alt="Preview Amaning" class="doc-preview">
+
+        <div class="doc-card reveal" onclick="openPDF('pdf/amaning.pdf')">
+            <img src="preview/amaning-preview.jpg" class="doc-preview" alt="Preview Amaning">
             <div class="doc-content">
                 <h3>Penetapan Amaning</h3>
-                <p>Penetapan No. 43.EKS.2019 proses resmi melalui pengadilan.</p>
+                <p>Penetapan No. 43.EKS.2019 membuktikan proses pengosongan lahan berjalan resmi.</p>
                 <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
@@ -298,47 +314,52 @@
 </section>
 
 <section id="protection">
-    <div class="tag">PROTEKSI NEGARA</div>
-    <h2 class="section-title">Pengawasan Institusional</h2>
+    <div class="tag reveal">PROTEKSI NEGARA</div>
+    <h2 class="section-title reveal">Pengawasan Institusional</h2>
+
     <div class="doc-grid">
-        <div class="doc-card" onclick="openPDF('pdf/dukungan-polri.pdf')">
-            <img src="preview/polri-preview.jpg" alt="Preview Dukungan Polri" class="doc-preview">
+        <div class="doc-card reveal" onclick="openPDF('pdf/dukungan-polri.pdf')">
+            <img src="preview/polri-preview.jpg" class="doc-preview" alt="Preview Polri">
             <div class="doc-content">
-                <h3>MA & Mabes Polri</h3>
-                <p>Perlindungan terhadap risiko mafia tanah.</p>
+                <h3>Mabes Polri</h3>
+                <p>Dukungan perlindungan penting terhadap risiko gangguan pihak luar.</p>
                 <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
-        <div class="doc-card" onclick="openPDF('pdf/ijb.pdf')">
-            <img src="preview/ijb-preview.jpg" alt="Preview IJB" class="doc-preview">
+
+        <div class="doc-card reveal" onclick="openPDF('pdf/ijb.pdf')">
+            <img src="preview/ijb-preview.jpg" class="doc-preview" alt="Preview IJB">
             <div class="doc-content">
-                <h3>IJB & Validitas</h3>
-                <p>Perikatan jual beli notariil memperkuat legal standing.</p>
+                <h3>IJB Notariil</h3>
+                <p>Perikatan jual beli memperkuat legal standing dan profesionalisme transaksi.</p>
                 <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
-        <div class="doc-card" onclick="openPDF('pdf/bapenda.pdf')">
-            <img src="preview/bapenda-preview.jpg" alt="Preview Bapenda" class="doc-preview">
+
+        <div class="doc-card reveal" onclick="openPDF('pdf/bapenda.pdf')">
+            <img src="preview/bapenda-preview.jpg" class="doc-preview" alt="Preview Bapenda">
             <div class="doc-content">
-                <h3>Bapenda & Administrasi</h3>
-                <p>Progres administrasi perpajakan yang transparan.</p>
+                <h3>Bapenda</h3>
+                <p>Progres administrasi perpajakan berjalan lancar sebagai bentuk transparansi.</p>
                 <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
-        <div class="doc-card" onclick="openPDF('pdf/bpn.pdf')">
-            <img src="preview/bpn-preview.jpg" alt="Preview BPN" class="doc-preview">
+
+        <div class="doc-card reveal" onclick="openPDF('pdf/bpn.pdf')">
+            <img src="preview/bpn-preview.jpg" class="doc-preview" alt="Preview BPN">
             <div class="doc-content">
                 <h3>Finalisasi BPN</h3>
-                <p>Tahap validasi batas lahan dan sertifikasi formal.</p>
+                <p>Tahap validasi batas lahan dan sertifikasi formal sedang berjalan.</p>
                 <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
     </div>
 </section>
 
-<section id="contact">
+<section id="contact" class="reveal">
     <div class="tag">CONTACT PERSON</div>
     <h2 class="section-title">Diskusi Strategis & Due Diligence</h2>
+
     <div class="contact-grid">
         <div class="contact-box">
             <div class="contact-item">
@@ -347,17 +368,22 @@
             </div>
             <div class="contact-item">
                 <span class="contact-label">WhatsApp</span>
-                <span class="contact-value"><a href="https://wa.me/628131002232" target="_blank" class="hover:text-cyan-400">+62 813-1002-232</a></span>
+                <span class="contact-value">
+                    <a href="https://wa.me/628131002232" target="_blank" class="hover:text-cyan-400">+62 813-1002-232</a>
+                </span>
             </div>
         </div>
+
         <div class="contact-box border-cyan-500/30">
             <div class="contact-item">
-                <span class="contact-label">Official</span>
+                <span class="contact-label">Official Inquiry</span>
                 <span class="contact-value text-cyan-400">ADMIN AMDF</span>
             </div>
             <div class="contact-item">
                 <span class="contact-label">Email</span>
-                <span class="contact-value"><a href="mailto:admin@bos-ww.online">admin@bos-ww.online</a></span>
+                <span class="contact-value">
+                    <a href="mailto:admin@bos-ww.online">admin@bos-ww.online</a>
+                </span>
             </div>
         </div>
     </div>
@@ -368,18 +394,22 @@
 </footer>
 
 <script>
-    // Fungsi untuk membuka file PDF di tab baru
+    // --- PDF Handler ---
     function openPDF(path){ 
         if(path) {
             window.open(path, "_blank"); 
+        } else {
+            alert("File tidak ditemukan.");
         }
     }
 
+    // --- Navbar Toggle ---
     function toggleMenu() {
         const nav = document.getElementById('navLinks');
         nav.classList.toggle('active');
     }
 
+    // --- Theme Switcher ---
     function toggleTheme() {
         const body = document.body;
         const icon = document.getElementById('theme-icon');
@@ -393,6 +423,23 @@
             icon.setAttribute('stroke', '#050b14');
         }
     }
+
+    // --- Animation Scroll Reveal ---
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+        observer.observe(el);
+    });
 </script>
 
 </body>
