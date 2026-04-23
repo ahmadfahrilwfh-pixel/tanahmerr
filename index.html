@@ -10,8 +10,12 @@
     <meta name="author" content="AMDF">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         :root {
@@ -22,7 +26,10 @@
             --text-main: #ffffff;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
-            --nav-bg: rgba(5, 11, 20, 0.85);
+            --nav-bg: rgba(5, 11, 20, 0.95);
+            --gradient-1: rgba(0, 245, 255, 0.05);
+            --gradient-2: rgba(109, 93, 251, 0.05);
+            --btn-hover: rgba(255,255,255,0.05);
             --btn-text: #ffffff;
         }
 
@@ -34,196 +41,303 @@
             --text-main: #0f172a;
             --text-muted: #475569;
             --border: rgba(0, 0, 0, 0.1);
-            --nav-bg: rgba(248, 250, 252, 0.85);
+            --nav-bg: rgba(248, 250, 252, 0.95);
+            --gradient-1: rgba(0, 129, 138, 0.05);
+            --gradient-2: rgba(74, 58, 255, 0.05);
+            --btn-hover: rgba(0,0,0,0.05);
             --btn-text: #0f172a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        /* --- TAMBAHAN ANIMASI (TIDAK MENGHAPUS KODE LAMA) --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease; }
         html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-body);
+            background: 
+                radial-gradient(circle at 10% 20%, var(--gradient-1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, var(--gradient-2) 0%, transparent 50%),
+                var(--bg-body);
             color: var(--text-main);
-            transition: background-color 0.4s ease, color 0.4s ease;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Animasi Scroll */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .theme-switch { position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 55px; height: 55px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease; }
+        .theme-switch:hover { transform: scale(1.1) rotate(180deg); }
 
-        .navbar {
-            backdrop-filter: blur(15px);
-            background: var(--nav-bg);
-            border-bottom: 1px solid var(--border);
-        }
+        .navbar { width: 100%; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center; position: fixed; top: 0; z-index: 999; backdrop-filter: blur(20px); background: var(--nav-bg); border-bottom: 1px solid var(--border); }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: .3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .menu-toggle { display: none; cursor: pointer; color: var(--text-main); }
 
-        .doc-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .doc-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        section { padding: 140px 8% 80px; }
+        .tag { display: inline-block; padding: 8px 16px; border-radius: 4px; background: rgba(0,245,255,.1); border-left: 3px solid var(--primary); color: var(--primary); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 25px; }
 
-        .btn-primary { background: var(--primary); color: #050b14; transition: transform 0.2s; }
-        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero h1 { font-size: 68px; font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -2px; background: linear-gradient(to right, var(--text-main) 60%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-muted); font-size: 18px; line-height: 1.8; margin-bottom: 40px; }
+        .hero-image { height: 580px; border-radius: 40px; background: url('img/tanah-utama.jpg') center/cover no-repeat; position: relative; border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+
+        .map-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid var(--border); margin-top: 40px; }
+        .section-title { font-size: 42px; font-weight: 700; margin-bottom: 20px; letter-spacing: -1px; }
+        .section-desc { color: var(--text-muted); line-height: 1.8; margin-bottom: 50px; font-size: 18px; max-width: 800px; }
+
+        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 30px; }
+        .doc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 30px; padding: 10px; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .doc-card:hover { transform: translateY(-12px); border-color: var(--primary); box-shadow: 0 20px 30px rgba(0,0,0,0.2); }
+        .doc-preview { width: 100%; height: 380px; object-fit: cover; border-radius: 22px; margin-bottom: 20px; }
+        .doc-content { padding: 15px 15px 25px; }
+        .doc-content h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+        .doc-content p { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 15px; }
+
+        .open-btn { display: block; width: 100%; text-align: center; padding: 14px; border-radius: 15px; background: var(--btn-hover); border: 1px solid var(--border); color: var(--btn-text); font-size: 14px; font-weight: 600; transition: .3s; }
+        .doc-card:hover .open-btn { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .contact-box { padding: 30px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 25px; }
+        .contact-item { padding: 15px 0; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; }
+        .contact-item:last-child { border: none; }
+        .contact-label { color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; }
+        .contact-value { font-size: 18px; font-weight: 700; color: #fff; }
+
+        footer { padding: 60px 8%; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 13px; letter-spacing: 1px; }
 
         @media(max-width:1024px) {
-            .hero-grid { grid-template-columns: 1fr; }
-            .nav-links.active { display: flex !important; }
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 48px; }
+            .menu-toggle { display: block; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; width: 100%; background: var(--nav-bg); padding: 30px 8%; border-bottom: 1px solid var(--border); }
+            .nav-links.active { display: flex; gap: 20px; }
+        }
+        @media(max-width:600px) {
+            .contact-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .contact-value { font-size: 16px; word-break: break-word; }
+            .contact-box { padding: 30px; }
+            .hero h1 { font-size: 38px; }
         }
     </style>
 </head>
 <body>
 
-<div class="fixed bottom-8 right-8 z-[1000] cursor-pointer" onclick="toggleTheme()">
-    <div id="theme-btn" class="w-14 h-14 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-        <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#050b14" stroke-width="2"><circle cx="12" cy="12" r="5"></circle></svg>
+<div class="theme-switch" onclick="toggleTheme()" title="Ganti Tema">
+    <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#050b14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+</div>
+
+<div class="navbar">
+    <div class="logo">MERR<span>PORTFOLIO</span></div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </div>
+    <div class="nav-links" id="navLinks">
+        <a href="#summary" onclick="toggleMenu()">Executive Summary</a>
+        <a href="#location" onclick="toggleMenu()">Location</a>
+        <a href="#legal" onclick="toggleMenu()">Legal</a>
+        <a href="#protection" onclick="toggleMenu()">Protection</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
     </div>
 </div>
 
-<nav class="navbar fixed top-0 w-full z-50 px-8 py-5 flex justify-between items-center">
-    <div class="text-2xl font-black tracking-tighter">MERR<span class="text-cyan-500">PORTFOLIO</span></div>
-    
-    <div class="menu-toggle md:hidden cursor-pointer" onclick="toggleMenu()">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-    </div>
-
-    <div class="nav-links hidden md:flex gap-8 text-sm font-semibold uppercase tracking-widest" id="navLinks">
-        <a href="#summary" class="hover:text-cyan-500 transition-colors">Summary</a>
-        <a href="#location" class="hover:text-cyan-500 transition-colors">Location</a>
-        <a href="#legal" class="hover:text-cyan-500 transition-colors">Legal</a>
-        <a href="#contact" class="hover:text-cyan-500 transition-colors">Contact</a>
-    </div>
-</nav>
-
-<section class="min-h-screen flex items-center pt-20 px-8 reveal">
-    <div class="hero-grid grid grid-cols-1 md:grid-cols-2 gap-16 items-center w-full">
+<section class="hero fade-in-up">
+    <div class="hero-grid">
         <div>
-            <div class="inline-block px-4 py-2 bg-cyan-500/10 border-l-4 border-cyan-500 text-cyan-500 text-xs font-bold uppercase tracking-widest mb-6">Premium Investor Deck</div>
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8">Investasi Lahan Strategis MERR Surabaya</h1>
-            <p class="text-lg text-slate-400 mb-10 leading-relaxed">
+            <div class="tag">PREMIUM INVESTOR DECK</div>
+            <h1>Investasi Lahan Strategis MERR Surabaya</h1>
+            <p>
                 Amankan aset premium di pusat pertumbuhan ekonomi Surabaya Timur. Kesempatan langka mengakuisisi lahan strategis MERR dengan legalitas <i>inkracht</i> dan perlindungan institusional penuh. Aset ini adalah peluang investasi terbaik yang siap untuk <strong>due diligence</strong> Anda hari ini.
             </p>
             <div class="flex gap-4">
                 <a href="#contact" class="px-8 py-4 bg-cyan-500 text-black font-bold rounded-xl hover:bg-white transition-all">Hubungi Kami</a>
-                <a href="#legal" class="px-8 py-4 border border-slate-700 rounded-xl hover:bg-slate-800 transition-all">Lihat Dokumen</a>
+                <a href="#legal" class="px-8 py-4 border border-gray-400 rounded-xl hover:bg-gray-100/10 transition-all">Lihat Dokumen</a>
             </div>
         </div>
-        <div class="h-[500px] w-full bg-slate-800 rounded-[30px] border border-slate-700 shadow-2xl relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('img/tanah-utama.jpg')] bg-cover bg-center"></div>
-        </div>
+        <div class="hero-image"></div>
     </div>
 </section>
 
-<section id="summary" class="py-24 px-8 reveal">
-    <div class="max-w-4xl">
-        <div class="text-cyan-500 font-bold tracking-widest text-sm mb-4">EXECUTIVE SUMMARY</div>
-        <h2 class="text-4xl font-bold mb-8">Legal Audit File yang Kuat</h2>
-        <p class="text-xl text-slate-400 leading-loose">
-            Data yang dimiliki bukan sekadar kumpulan dokumen, melainkan sebuah rangkaian bukti hukum yang saling terhubung mulai dari putusan pengadilan, proses eksekusi resmi, perlindungan institusional negara, validitas transaksi, hingga finalisasi administratif di BPN dan Bapenda. Ini yang menjadikan aset ini sangat layak untuk investor besar yang mencari <strong>jual tanah surabaya</strong> yang terpercaya.
-        </p>
-    </div>
+<section id="summary" class="fade-in-up">
+    <div class="tag">EXECUTIVE SUMMARY</div>
+    <h2 class="section-title">Legal Audit File yang Kuat</h2>
+    <p class="section-desc">
+        Data yang dimiliki bukan sekadar kumpulan dokumen, melainkan sebuah
+        rangkaian bukti hukum yang saling terhubung mulai dari putusan pengadilan,
+        proses eksekusi resmi, perlindungan institusional negara, validitas transaksi,
+        hingga finalisasi administratif di BPN dan Bapenda.
+        Ini yang menjadikan aset ini sangat layak untuk investor besar yang mencari <strong>jual tanah surabaya</strong> yang terpercaya.
+    </p>
 </section>
 
-<section id="location" class="py-24 px-8 bg-slate-900/30 reveal">
-    <div class="text-cyan-500 font-bold tracking-widest text-sm mb-4">VISUALISASI LOKASI</div>
-    <h2 class="text-4xl font-bold mb-6">Posisi Strategis Aset</h2>
-    <p class="text-lg text-slate-400 mb-10 max-w-2xl">Visualisasi area MERR (Middle East Ring Road) Surabaya. Titik pusat pertumbuhan ekonomi baru dengan aksesibilitas terbaik ke gerbang tol dan pusat bisnis.</p>
-    <div class="w-full h-[450px] rounded-[30px] overflow-hidden border border-slate-700">
+<section id="location" class="fade-in-up" style="background: var(--gradient-1)">
+    <div class="tag">VISUALISASI LOKASI</div>
+    <h2 class="section-title">Posisi Strategis Aset</h2>
+    <p class="section-desc">Visualisasi area MERR (Middle East Ring Road) Surabaya. Titik pusat pertumbuhan ekonomi baru dengan aksesibilitas terbaik ke gerbang tol dan pusat bisnis.</p>
+    <div class="map-box">
         <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3957.2402051459358!2d112.77797388885496!3d-7.326895600000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srsud%20eka%20candrarini!5e0!3m2!1sen!2sid!4v1776865943724!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 </section>
 
-<section id="legal" class="py-24 px-8 reveal">
-    <div class="text-cyan-500 font-bold tracking-widest text-sm mb-4">FONDASI HUKUM</div>
-    <h2 class="text-4xl font-bold mb-12">Dokumen Inti Investasi</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="doc-card p-6 rounded-[30px] cursor-pointer" onclick="openPDF('pdf/putusan-pn.pdf')">
-            <h3 class="text-2xl font-bold mb-4">Putusan PN Surabaya</h3>
-            <p class="text-slate-400 mb-6">Putusan PN No. 728/Pdt.G/2018 dengan status Inkracht. Hak telah diakui negara secara final dan memiliki kepastian hukum maksimal.</p>
-            <div class="px-6 py-3 border border-slate-700 rounded-xl text-sm font-semibold inline-block">Buka Berkas Digital</div>
-        </div>
-        <div class="doc-card p-6 rounded-[30px] cursor-pointer" onclick="openPDF('pdf/amaning.pdf')">
-            <h3 class="text-2xl font-bold mb-4">Penetapan Amaning</h3>
-            <p class="text-slate-400 mb-6">Penetapan No. 43.EKS.2019 membuktikan proses pengosongan lahan berjalan secara resmi melalui pengadilan.</p>
-            <div class="px-6 py-3 border border-slate-700 rounded-xl text-sm font-semibold inline-block">Buka Berkas Digital</div>
-        </div>
-    </div>
-</section>
-
-<section id="protection" class="py-24 px-8 reveal">
-    <div class="text-cyan-500 font-bold tracking-widest text-sm mb-4">PROTEKSI NEGARA</div>
-    <h2 class="text-4xl font-bold mb-12">Pengawasan & Institusional</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="doc-card p-6 rounded-[30px]">
-            <h3 class="font-bold mb-3">MA & Mabes Polri</h3>
-            <p class="text-sm text-slate-400 mb-6">Dukungan institusional dari MA dan Mabes Polri menjadi lapisan perlindungan penting.</p>
-            <div class="text-xs font-bold text-cyan-500 cursor-pointer" onclick="openPDF('pdf/dukungan-polri.pdf')">LIHAT DOKUMEN →</div>
-        </div>
-        <div class="doc-card p-6 rounded-[30px]">
-            <h3 class="font-bold mb-3">IJB & Transaksi</h3>
-            <p class="text-sm text-slate-400 mb-6">Perikatan jual beli notariil memperkuat legal standing investor.</p>
-            <div class="text-xs font-bold text-cyan-500 cursor-pointer" onclick="openPDF('pdf/ijb.pdf')">LIHAT DOKUMEN →</div>
-        </div>
-        <div class="doc-card p-6 rounded-[30px]">
-            <h3 class="font-bold mb-3">Bapenda</h3>
-            <p class="text-sm text-slate-400 mb-6">Progres administrasi perpajakan dan validasi berjalan transparan.</p>
-            <div class="text-xs font-bold text-cyan-500 cursor-pointer" onclick="openPDF('pdf/bapenda.pdf')">LIHAT DOKUMEN →</div>
-        </div>
-        <div class="doc-card p-6 rounded-[30px]">
-            <h3 class="font-bold mb-3">Finalisasi BPN</h3>
-            <p class="text-sm text-slate-400 mb-6">Tahap validasi batas lahan dan sertifikasi sedang berjalan.</p>
-            <div class="text-xs font-bold text-cyan-500 cursor-pointer" onclick="openPDF('pdf/bpn.pdf')">LIHAT DOKUMEN →</div>
-        </div>
-    </div>
-</section>
-
-<section id="contact" class="py-24 px-8 border-t border-slate-800 reveal">
-    <div class="max-w-3xl">
-        <h2 class="text-4xl font-bold mb-6">Diskusi Strategis</h2>
-        <p class="text-slate-400 mb-12">Untuk verifikasi dokumen, site visit, atau kerja sama investasi, silakan hubungi kontak berikut:</p>
-        
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="p-8 bg-slate-800/50 rounded-3xl border border-slate-700">
-                <div class="text-sm uppercase text-cyan-500 font-bold mb-1">Bp Wawan</div>
-                <a href="https://wa.me/628131002232" class="text-xl font-bold hover:text-cyan-400">+62 813-1002-232</a>
-            </div>
-            <div class="p-8 bg-slate-800/50 rounded-3xl border border-slate-700">
-                <div class="text-sm uppercase text-cyan-500 font-bold mb-1">Bp Fakhrudin</div>
-                <a href="https://wa.me/6281239746692" class="text-xl font-bold hover:text-cyan-400">+62 812-3974-6692</a>
+<section id="legal" class="fade-in-up">
+    <div class="tag">FONDASI HUKUM</div>
+    <h2 class="section-title">Dokumen Inti Investasi</h2>
+    <p class="section-desc">Berikut adalah berkas hukum utama yang menjamin keamanan investasi Anda.</p>
+    <div class="doc-grid">
+        <div class="doc-card" onclick="openPDF('pdf/putusan-pn.pdf')">
+            <img src="preview/putusan-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Putusan PN Surabaya</h3>
+                <p>Putusan PN No. 728/Pdt.G/2018 dengan status Inkracht. Hak telah diakui negara secara final dan memiliki kepastian hukum maksimal.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
-        <div class="mt-8 p-6 bg-cyan-500/5 rounded-2xl border border-cyan-500/20 text-center">
-            <p class="text-cyan-500"><strong>Email:</strong> <a href="mailto:admin@bos-ww.online">admin@bos-ww.online</a></p>
+        <div class="doc-card" onclick="openPDF('pdf/amaning.pdf')">
+            <img src="preview/amaning-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Penetapan Amaning</h3>
+                <p>Penetapan No. 43.EKS.2019 membuktikan proses pengosongan lahan berjalan secara resmi melalui pengadilan.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
         </div>
     </div>
 </section>
 
-<footer class="py-12 px-8 text-center border-t border-slate-800 text-slate-500 text-sm">
-    <p class="mb-2">&copy; 2026 Hak Milik AMDF</p>
-    <p>CONFIDENTIAL INVESTOR DECK • Legal Audit File • MERR Surabaya</p>
+<section id="protection" class="fade-in-up">
+    <div class="tag">PROTEKSI NEGARA</div>
+    <h2 class="section-title">Pengawasan dan Perlindungan Institusional</h2>
+    <div class="doc-grid">
+        <div class="doc-card" onclick="openPDF('pdf/dukungan-polri.pdf')">
+            <img src="preview/polri-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Mahkamah Agung & Mabes Polri</h3>
+                <p>Dukungan institusional dari MA dan Mabes Polri menjadi lapisan perlindungan penting terhadap risiko mafia tanah dan gangguan pihak luar.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+        <div class="doc-card" onclick="openPDF('pdf/ijb.pdf')">
+            <img src="preview/ijb-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>IJB & Validitas Transaksi</h3>
+                <p>Perikatan jual beli notariil memperkuat legal standing, profesionalisme transaksi, dan kesiapan due diligence investor.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+        <div class="doc-card" onclick="openPDF('pdf/bapenda.pdf')">
+            <img src="preview/bapenda-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Bapenda & Administrasi</h3>
+                <p>Progres administrasi perpajakan dan validasi tambahan berjalan lancar sebagai bentuk transparansi penuh.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+        <div class="doc-card" onclick="openPDF('pdf/bpn.pdf')">
+            <img src="preview/bpn-preview.jpg" class="doc-preview">
+            <div class="doc-content">
+                <h3>Finalisasi BPN</h3>
+                <p>Tahap validasi batas lahan dan sertifikasi formal sedang berjalan, meningkatkan nilai komersial aset secara signifikan.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="fade-in-up">
+    <div class="tag">CONTACT PERSON</div>
+    <h2 class="section-title">Diskusi Strategis & Due Diligence to Admin Mr Arriy Wibowo</h2>
+    <p class="section-desc">
+        Untuk verifikasi dokumen asli, site visit, pembahasan joint venture,
+        akuisisi strategis, maupun kerja sama investasi jangka panjang,
+        silakan menghubungi contact person Admin Bp Arriy Wibowo berikut.
+    </p>
+
+    <div class="contact-grid">
+        <div class="contact-box">
+            <div class="contact-item">
+                <span class="contact-label">Nama</span>
+                <span class="contact-value">BP WAWAN</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-value"><a href="https://wa.me/628131002232" target="_blank" class="hover:text-cyan-400">+62 813-1002-232</a></span>
+            </div>
+        </div>
+        <div class="contact-box">
+            <div class="contact-item">
+                <span class="contact-label">Nama</span>
+                <span class="contact-value">BP FAKHRUDIN</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-value"><a href="https://wa.me/6281239746692" target="_blank" class="hover:text-cyan-400">+62 812-3974-6692</a></span>
+            </div>
+        </div>
+        <div class="contact-box border-cyan-500/30">
+            <div class="contact-item">
+                <span class="contact-label">Official Inquiry</span>
+                <span class="contact-value text-cyan-400">ADMIN AMDF</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Direct Email</span>
+                <span class="contact-value"><a href="mailto:admin@bos-ww.online" style="word-break: break-word;">admin@bos-ww.online</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="mt-10 p-6 text-center border border-dashed rounded-2xl" style="border-color: var(--border);">
+        <p style="color: var(--text-muted);"><strong>Keterangan:</strong> Serious Investor Only</p>
+    </div>
+</section>
+
+<footer>
+    <p>CONFIDENTIAL INVESTOR DECK • Legal Audit File • MERR Surabaya | By AMDF</p>
+    <p style="margin-top: 10px;"><strong>&copy; 2026 Hak Milik AMDF</strong></p>
 </footer>
 
 <script>
-    // Animation Observer
+    // Intersection Observer untuk Animasi Fade In
+    const observerOptions = { threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, observerOptions);
+    document.querySelectorAll('.fade-in-up').forEach(section => observer.observe(section));
 
     function openPDF(path){ window.open(path, "_blank"); }
     function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
-
     function toggleTheme() {
         const body = document.body;
         const icon = document.getElementById('theme-icon');
         body.classList.toggle('light-mode');
-        icon.innerHTML = body.classList.contains('light-mode') ? 
-            '<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>' : 
-            '<circle cx="12" cy="12" r="5"></circle>';
+        if(body.classList.contains('light-mode')) {
+            icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            icon.setAttribute('stroke', '#ffffff');
+        } else {
+            icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+            icon.setAttribute('stroke', '#050b14');
+        }
     }
 </script>
 
