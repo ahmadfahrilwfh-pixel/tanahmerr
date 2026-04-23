@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tanah Murah di Surabaya Timur | Ahmad Fahril Portfolio</title>
-    <meta name="description" content="Investasi tanah murah di Surabaya Timur kawasan MERR. Aset premium dengan legalitas inkracht.">
-    <meta name="author" content="Ahmad Fahril">
+    <title>Tanah Murah di Surabaya Timur | Beli Tanah Murah di Surabaya Timur MERR</title>
+    <meta name="description" content="Investasi tanah murah di Surabaya Timur kawasan MERR. Aset premium dengan legalitas inkracht, perlindungan institusional, dan potensi pengembangan bernilai tinggi.">
+    <meta name="keywords" content="tanah murah di surabaya timur, jual tanah surabaya, investasi tanah merr, lahan komersial surabaya, tanah strategis surabaya timur">
+    <meta name="author" content="AMDF">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -21,272 +27,653 @@
             --text-main: #ffffff;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
-            --nav-bg: rgba(5, 11, 20, 0.85);
+            --nav-bg: rgba(5, 11, 20, 0.9);
+            --gradient-1: rgba(0, 245, 255, 0.15);
+            --gradient-2: rgba(109, 93, 251, 0.15);
+            --btn-hover: rgba(255,255,255,0.05);
+            --btn-text: #ffffff;
             --accent-glow: rgba(0, 245, 255, 0.3);
         }
 
         .light-mode {
             --primary: #00818a;
             --secondary: #4a3aff;
-            --bg-body: #f8fafc;
+            --bg-body: #f0f4f8;
             --bg-card: #ffffff;
             --text-main: #0f172a;
             --text-muted: #475569;
             --border: rgba(0, 0, 0, 0.1);
-            --nav-bg: rgba(248, 250, 252, 0.85);
+            --nav-bg: rgba(240, 244, 248, 0.9);
+            --gradient-1: rgba(0, 129, 138, 0.1);
+            --gradient-2: rgba(74, 58, 255, 0.1);
+            --btn-hover: rgba(0,0,0,0.05);
+            --btn-text: #0f172a;
             --accent-glow: rgba(0, 129, 138, 0.2);
         }
 
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background-color 0.4s, color 0.4s;
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
+            min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        /* Animated Background */
-        #bg-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.5;
-        }
-
-        .navbar {
-            width: 100%; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center;
-            position: fixed; top: 0; z-index: 999; backdrop-filter: blur(15px);
-            background: var(--nav-bg); border-bottom: 1px solid var(--border);
-        }
-
-        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; }
-        .logo span { color: var(--primary); text-shadow: 0 0 10px var(--accent-glow); }
-
-        .nav-links a {
-            color: var(--text-muted); font-size: 13px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1px; margin-left: 25px;
             position: relative;
         }
-        .nav-links a:hover { color: var(--primary); }
 
-        /* Hero Animation */
-        .hero h1 {
-            font-size: clamp(40px, 6vw, 68px); font-weight: 800; line-height: 1.1;
-            background: linear-gradient(135deg, var(--text-main) 60%, var(--primary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: titleShift 6s infinite alternate;
+        /* Futuristic Background Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
         }
 
-        @keyframes titleShift {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(30deg); }
-        }
-
-        .doc-card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 30px; padding: 15px; backdrop-filter: blur(10px);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .doc-card:hover {
-            transform: translateY(-15px); border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.15);
+        .bg-glow {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 10% 20%, var(--gradient-1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, var(--gradient-2) 0%, transparent 40%);
+            filter: blur(80px);
         }
 
         .theme-switch {
             position: fixed; bottom: 30px; right: 30px; z-index: 1000;
             width: 60px; height: 60px; border-radius: 50%;
             background: var(--primary); display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 0 20px var(--accent-glow);
+            cursor: pointer; box-shadow: 0 0 20px var(--accent-glow); 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .theme-switch:hover { transform: scale(1.1) rotate(15deg); }
+
+        .navbar {
+            width: 100%; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 0; z-index: 999; backdrop-filter: blur(15px);
+            background: var(--nav-bg); border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
         }
 
-        /* Contact Box Glow */
-        .contact-box {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 25px; padding: 35px; position: relative; overflow: hidden;
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: -1px; }
+        .logo span { 
+            color: var(--primary); 
+            text-shadow: 0 0 10px var(--accent-glow);
         }
-        .contact-box:hover { border-color: var(--primary); }
 
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; transition: .3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+            background: var(--primary); transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .menu-toggle { display: none; cursor: pointer; color: var(--text-main); }
+
+        section { padding: 160px 8% 100px; position: relative; }
+
+        .tag {
+            display: inline-block; padding: 10px 20px; border-radius: 50px;
+            background: var(--gradient-1); border: 1px solid var(--primary);
+            color: var(--primary); font-size: 11px; font-weight: 800;
+            letter-spacing: 2px; margin-bottom: 30px;
+            box-shadow: 0 0 15px var(--accent-glow);
+            text-transform: uppercase;
+            animation: pulseGlow 2s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px var(--accent-glow); }
+            100% { box-shadow: 0 0 20px var(--accent-glow); }
+        }
+
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 72px); font-weight: 800; line-height: 1.1; margin-bottom: 30px;
+            letter-spacing: -3px; background: linear-gradient(135deg, var(--text-main) 50%, var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: titleShift 8s infinite alternate;
+        }
+        @keyframes titleShift {
+            0% { filter: hue-rotate(0deg); letter-spacing: -3px; }
+            100% { filter: hue-rotate(15deg); letter-spacing: -2px; }
+        }
+
+        .hero p { color: var(--text-muted); font-size: 19px; line-height: 1.8; margin-bottom: 45px; max-width: 600px; }
+
+        .hero-image {
+            height: 550px; border-radius: 30px;
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&q=80') center/cover no-repeat;
+            position: relative; border: 1px solid var(--border);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            animation: floatImage 6s ease-in-out infinite;
+        }
+        @keyframes floatImage {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .hero-image::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(45deg, var(--primary), transparent);
+            opacity: 0.2;
+            transition: 0.5s;
+        }
+        .hero-image:hover::before { opacity: 0.4; }
+
+        .section-title { font-size: 48px; font-weight: 800; margin-bottom: 25px; letter-spacing: -1.5px; }
+        .section-desc { color: var(--text-muted); line-height: 1.9; margin-bottom: 60px; font-size: 18px; max-width: 850px; }
+
+        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 35px; }
+        .doc-card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 35px; padding: 15px; cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(10px);
+        }
+        .doc-card:hover { 
+            transform: translateY(-15px) scale(1.02); 
+            border-color: var(--primary); 
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.15);
+        }
+        .doc-preview { width: 100%; height: 350px; object-fit: cover; border-radius: 25px; margin-bottom: 25px; transition: 0.5s; }
+        .doc-card:hover .doc-preview { filter: brightness(1.08) contrast(1.05); transform: scale(1.01); }
+        
+        .doc-content { padding: 10px 15px 20px; }
+        .doc-content h3 { font-size: 24px; font-weight: 700; margin-bottom: 15px; }
+        .doc-content p { color: var(--text-muted); line-height: 1.7; margin-bottom: 25px; font-size: 15px; }
+
+        .open-btn {
+            display: block; width: 100%; text-align: center; padding: 16px;
+            border-radius: 18px; background: var(--btn-hover);
+            border: 1px solid var(--border); color: var(--btn-text);
+            font-size: 14px; font-weight: 700; transition: .4s;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .doc-card:hover .open-btn { background: var(--primary); color: #050b14; border-color: var(--primary); box-shadow: 0 10px 20px var(--accent-glow); }
+
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .contact-box { 
+            padding: 40px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 30px; 
+            backdrop-filter: blur(10px); position: relative; overflow: hidden;
+            transition: transform 0.4s ease, border-color 0.3s;
+        }
+        .contact-box:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
+        .contact-box::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0; transition: 0.5s; pointer-events: none;
+        }
+        .contact-box:hover::after { opacity: 0.15; }
+
+        .contact-item { 
+            padding: 20px 0; border-bottom: 1px solid var(--border); 
+            display: flex; justify-content: space-between; align-items: center; gap: 15px;
+        }
+        .contact-item:last-child { border: none; }
+        .contact-label { color: var(--text-muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .contact-value { font-size: 19px; font-weight: 700; color: var(--text-main); }
+        .contact-value a { transition: 0.3s; color: var(--text-main); text-decoration: none; }
+        .contact-value a:hover { color: var(--primary); text-shadow: 0 0 10px var(--accent-glow); }
+
+        .map-box { width: 100%; height: 500px; border-radius: 40px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.3); transition: 0.5s; }
+        .map-box:hover { transform: scale(1.01); border-color: var(--primary); }
+
+        footer { padding: 80px 8% 40px; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* AOS animation overrides */
+        [data-aos] { transition-duration: 1000ms !important; }
+
+        /* Button hover effect */
+        .btn-glow {
+            transition: all 0.4s;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 25px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+
+        /* RESPONSIVE */
         @media(max-width:1024px) {
-            .nav-links { display: none; } /* Simplified for brevity, add mobile menu as needed */
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 50px; }
+            .hero p { margin: 0 auto 40px; }
+            .hero-image { height: 400px; }
+            .menu-toggle { display: block; }
+            .nav-links { 
+                display: none; flex-direction: column; position: absolute; top: 80px; left: 0;
+                width: 100%; background: var(--nav-bg); padding: 40px 8%; border-bottom: 1px solid var(--border);
+                gap: 25px; text-align: center;
+            }
+            .nav-links.active { display: flex; animation: slideDown 0.4s ease forwards; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media(max-width:600px) {
+            section { padding: 120px 6% 60px; }
+            .hero h1 { font-size: 42px; }
+            .contact-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .contact-value { font-size: 17px; }
+            .contact-box { padding: 30px 20px; }
+            .section-title { font-size: 36px; }
+        }
+
+        /* Floating particles animation */
+        .floating-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+            border-radius: 50%;
+            background: var(--primary);
+            opacity: 0.15;
+            animation: floatParticle linear infinite;
+        }
+        @keyframes floatParticle {
+            from { transform: translateY(100vh) translateX(0) rotate(0deg); }
+            to { transform: translateY(-20vh) translateX(100px) rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
 <canvas id="bg-canvas"></canvas>
+<div class="bg-glow"></div>
 
-<div class="theme-switch" onclick="toggleTheme()">
-    <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#050b14" stroke-width="2">
+<div class="theme-switch" onclick="toggleTheme()" title="Ganti Tema">
+    <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#050b14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>
 </div>
 
-<nav class="navbar">
+<div class="navbar">
     <div class="logo">MERR<span>PORTFOLIO</span></div>
-    <div class="nav-links">
-        <a href="#summary">Summary</a>
-        <a href="#legal">Legal</a>
-        <a href="#contact">Contact</a>
+    
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
     </div>
-</nav>
 
-<section class="pt-40 px-[8%] pb-20">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <div data-aos="fade-right">
-            <div class="inline-block px-4 py-2 rounded-full border border-cyan-500/50 text-cyan-400 text-[10px] font-bold tracking-widest mb-6">
-                PREMIUM INVESTOR DECK
-            </div>
+    <div class="nav-links" id="navLinks">
+        <a href="#summary" onclick="toggleMenu()">Executive Summary</a>
+        <a href="#location" onclick="toggleMenu()">Location</a>
+        <a href="#legal" onclick="toggleMenu()">Legal</a>
+        <a href="#protection" onclick="toggleMenu()">Protection</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
+</div>
+
+<section class="hero">
+    <div class="hero-grid">
+        <div data-aos="fade-right" data-aos-duration="1000">
+            <div class="tag">PREMIUM INVESTOR DECK</div>
             <h1>Investasi Lahan Strategis MERR Surabaya</h1>
-            <p class="text-slate-400 text-lg mt-6 mb-10 leading-relaxed">
-                Amankan aset premium di pusat pertumbuhan ekonomi Surabaya Timur. Kesempatan langka dengan legalitas inkracht dan perlindungan institusional penuh.
+            <p>
+                Amankan aset premium di pusat pertumbuhan ekonomi Surabaya Timur. Kesempatan langka mengakuisisi lahan strategis MERR dengan legalitas <i>inkracht</i> dan perlindungan institusional penuh. Aset ini adalah peluang investasi terbaik yang siap untuk <strong>due diligence</strong> Anda hari ini.
             </p>
             <div class="flex gap-4">
-                <a href="#contact" class="px-8 py-4 bg-cyan-500 text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(0,245,255,0.5)] transition-all">Hubungi Kami</a>
-                <a href="#legal" class="px-8 py-4 border border-slate-600 rounded-xl hover:bg-white/5 transition-all">Lihat Dokumen</a>
+                <a href="#contact" class="px-8 py-4 bg-cyan-500 text-black font-bold rounded-xl hover:bg-white transition-all btn-glow">Hubungi Kami</a>
+                <a href="#legal" class="px-8 py-4 border border-gray-400 rounded-xl hover:bg-gray-100/10 transition-all">Lihat Dokumen</a>
             </div>
         </div>
-        <div class="h-[500px] rounded-[40px] bg-slate-800 border border-white/10 overflow-hidden shadow-2xl" data-aos="zoom-in">
-            <div class="w-full h-full bg-cover bg-center opacity-80" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?q=80');"></div>
-        </div>
+        <div data-aos="fade-left" data-aos-duration="1000" class="hero-image"></div>
     </div>
 </section>
 
-<section id="legal" class="px-[8%] py-20">
-    <h2 class="text-4xl font-bold mb-4" data-aos="fade-up">Dokumen Inti Investasi</h2>
-    <p class="text-slate-400 mb-12" data-aos="fade-up" data-aos-delay="100">Berkas hukum utama yang menjamin keamanan investasi Anda.</p>
+<section id="summary">
+    <div class="tag" data-aos="fade-up">EXECUTIVE SUMMARY</div>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Legal Audit File yang Kuat</h2>
+    <p class="section-desc" data-aos="fade-up" data-aos-delay="200">
+        Data yang dimiliki bukan sekadar kumpulan dokumen, melainkan sebuah
+        rangkaian bukti hukum yang saling terhubung mulai dari putusan pengadilan,
+        proses eksekusi resmi, perlindungan institusional negara, validitas transaksi,
+        hingga finalisasi administratif di BPN dan Bapenda.
+        Ini yang menjadikan aset ini sangat layak untuk investor besar yang mencari <strong>jual tanah surabaya</strong> yang terpercaya.
+    </p>
+</section>
+
+<section id="location" style="background: var(--gradient-1)">
+    <div class="tag" data-aos="fade-up">VISUALISASI LOKASI</div>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Posisi Strategis Aset</h2>
+    <p class="section-desc" data-aos="fade-up" data-aos-delay="200">Visualisasi area MERR (Middle East Ring Road) Surabaya. Titik pusat pertumbuhan ekonomi baru dengan aksesibilitas terbaik ke gerbang tol dan pusat bisnis.</p>
     
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="doc-card" data-aos="fade-up" data-aos-delay="200" onclick="window.open('pdf/putusan-pn.pdf')">
-            <div class="h-64 bg-slate-700 rounded-2xl mb-6 overflow-hidden">
-                <img src="preview/putusan-preview.jpg" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl font-bold mb-3">Putusan PN Surabaya</h3>
-            <p class="text-sm text-slate-400 mb-6">Putusan PN No. 728/Pdt.G/2018 status Inkracht. Hak telah diakui negara.</p>
-            <div class="w-full py-3 rounded-xl bg-white/5 text-center text-xs font-bold border border-white/5">BUKA DOKUMEN</div>
-        </div>
-
-        <div class="doc-card" data-aos="fade-up" data-aos-delay="300" onclick="window.open('pdf/amaning.pdf')">
-            <div class="h-64 bg-slate-700 rounded-2xl mb-6 overflow-hidden">
-                <img src="preview/amaning-preview.jpg" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl font-bold mb-3">Penetapan Amaning</h3>
-            <p class="text-sm text-slate-400 mb-6">Penetapan No. 43.EKS.2019 proses pengosongan lahan resmi pengadilan.</p>
-            <div class="w-full py-3 rounded-xl bg-white/5 text-center text-xs font-bold border border-white/5">BUKA DOKUMEN</div>
-        </div>
-
-        <div class="doc-card" data-aos="fade-up" data-aos-delay="400" onclick="window.open('pdf/dukungan-polri.pdf')">
-            <div class="h-64 bg-slate-700 rounded-2xl mb-6 overflow-hidden">
-                <img src="preview/polri-preview.jpg" class="w-full h-full object-cover">
-            </div>
-            <h3 class="text-xl font-bold mb-3">Mabes Polri & MA</h3>
-            <p class="text-sm text-slate-400 mb-6">Perlindungan institusional terhadap risiko gangguan mafia tanah.</p>
-            <div class="w-full py-3 rounded-xl bg-white/5 text-center text-xs font-bold border border-white/5">BUKA DOKUMEN</div>
-        </div>
+    <div class="map-box" data-aos="zoom-in" data-aos-duration="800">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3957.2402051459358!2d112.77797388885496!3d-7.326895600000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srsud%20eka%20candrarini!5e0!3m2!1sen!2sid!4v1776865943724!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 </section>
 
-<section id="contact" class="px-[8%] py-20 bg-cyan-500/5">
-    <div class="max-w-4xl mx-auto text-center mb-16">
-        <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Diskusi Strategis</h2>
-        <p class="text-slate-400" data-aos="fade-up">Hubungi tim administrasi untuk verifikasi dokumen dan site visit.</p>
-    </div>
+<section id="legal">
+    <div class="tag" data-aos="fade-up">FONDASI HUKUM</div>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Dokumen Inti Investasi</h2>
+    <p class="section-desc" data-aos="fade-up" data-aos-delay="200">Berikut adalah berkas hukum utama yang menjamin keamanan investasi Anda.</p>
 
-    <div class="grid md:grid-cols-2 gap-6">
-        <div class="contact-box" data-aos="fade-right">
-            <div class="text-[10px] text-cyan-400 font-black tracking-tighter mb-4 uppercase">Representative One</div>
-            <div class="flex justify-between items-center">
-                <div>
-                    <div class="text-2xl font-bold">BP WAWAN</div>
-                    <div class="text-slate-500 text-sm mt-1">+62 813-1002-232</div>
-                </div>
-                <a href="https://wa.me/628131002232" class="p-4 bg-cyan-500 rounded-full text-black">
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.438-9.89 9.886-.001 2.15.633 3.557 1.623 5.256l-1.079 3.946 4.046-1.061z"/></svg>
-                </a>
+    <div class="doc-grid">
+        <div class="doc-card" data-aos="flip-left" data-aos-duration="800" onclick="openPDF('pdf/putusan-pn.pdf')">
+            <img src="preview/putusan-preview.jpg" class="doc-preview" alt="Putusan Preview">
+            <div class="doc-content">
+                <h3>Putusan PN Surabaya</h3>
+                <p>Putusan PN No. 728/Pdt.G/2018 dengan status Inkracht. Hak telah diakui negara secara final dan memiliki kepastian hukum maksimal.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
 
-        <div class="contact-box" data-aos="fade-left">
-            <div class="text-[10px] text-cyan-400 font-black tracking-tighter mb-4 uppercase">Representative Two</div>
-            <div class="flex justify-between items-center">
-                <div>
-                    <div class="text-2xl font-bold">BP FAKHRUDIN</div>
-                    <div class="text-slate-500 text-sm mt-1">+62 812-3974-6692</div>
-                </div>
-                <a href="https://wa.me/6281239746692" class="p-4 bg-cyan-500 rounded-full text-black">
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.438-9.89 9.886-.001 2.15.633 3.557 1.623 5.256l-1.079 3.946 4.046-1.061z"/></svg>
-                </a>
+        <div class="doc-card" data-aos="flip-left" data-aos-duration="800" data-aos-delay="100" onclick="openPDF('pdf/amaning.pdf')">
+            <img src="preview/amaning-preview.jpg" class="doc-preview" alt="Penetapan Preview">
+            <div class="doc-content">
+                <h3>Penetapan Amaning</h3>
+                <p>Penetapan No. 43.EKS.2019 membuktikan proses pengosongan lahan berjalan secara resmi melalui pengadilan.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
             </div>
         </div>
     </div>
 </section>
 
-<footer class="py-10 text-center text-slate-500 text-[10px] tracking-[4px] border-t border-white/5 uppercase">
-    Copyright © 2026 Ahmad Fahril • Confidential Investor Deck • MERR Surabaya
+<section id="protection">
+    <div class="tag" data-aos="fade-up">PROTEKSI NEGARA</div>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Pengawasan dan Perlindungan Institusional</h2>
+
+    <div class="doc-grid">
+        <div class="doc-card" data-aos="flip-right" data-aos-duration="800" onclick="openPDF('pdf/dukungan-polri.pdf')">
+            <img src="preview/polri-preview.jpg" class="doc-preview" alt="Dukungan Polri">
+            <div class="doc-content">
+                <h3>Mahkamah Agung & Mabes Polri</h3>
+                <p>Dukungan institusional dari MA dan Mabes Polri menjadi lapisan perlindungan penting terhadap risiko mafia tanah dan gangguan pihak luar.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+
+        <div class="doc-card" data-aos="flip-right" data-aos-duration="800" data-aos-delay="100" onclick="openPDF('pdf/ijb.pdf')">
+            <img src="preview/ijb-preview.jpg" class="doc-preview" alt="IJB Preview">
+            <div class="doc-content">
+                <h3>IJB & Validitas Transaksi</h3>
+                <p>Perikatan jual beli notariil memperkuat legal standing, profesionalisme transaksi, dan kesiapan due diligence investor.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+
+        <div class="doc-card" data-aos="flip-right" data-aos-duration="800" data-aos-delay="200" onclick="openPDF('pdf/bapenda.pdf')">
+            <img src="preview/bapenda-preview.jpg" class="doc-preview" alt="Bapenda Preview">
+            <div class="doc-content">
+                <h3>Bapenda & Administrasi</h3>
+                <p>Progres administrasi perpajakan dan validasi tambahan berjalan lancar sebagai bentuk transparansi penuh.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+
+        <div class="doc-card" data-aos="flip-right" data-aos-duration="800" data-aos-delay="300" onclick="openPDF('pdf/bpn.pdf')">
+            <img src="preview/bpn-preview.jpg" class="doc-preview" alt="BPN Preview">
+            <div class="doc-content">
+                <h3>Finalisasi BPN</h3>
+                <p>Tahap validasi batas lahan dan sertifikasi formal sedang berjalan, meningkatkan nilai komersial aset secara signifikan.</p>
+                <span class="open-btn">Buka Berkas Digital</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="tag" data-aos="fade-up">CONTACT PERSON</div>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Diskusi Strategis & Due Diligence to Admin Mr Arriy Wibowo</h2>
+    <p class="section-desc" data-aos="fade-up" data-aos-delay="200">
+        Untuk verifikasi dokumen asli, site visit, pembahasan joint venture,
+        akuisisi strategis, maupun kerja sama investasi jangka panjang,
+        silakan menghubungi contact person Admin Bp Arriy Wibowo berikut.
+    </p>
+
+    <div class="contact-grid">
+        <div class="contact-box" data-aos="fade-up" data-aos-delay="100">
+            <div class="contact-item">
+                <span class="contact-label">Nama</span>
+                <span class="contact-value">BP WAWAN</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-value">
+                    <a href="https://wa.me/628131002232" target="_blank" class="hover:text-cyan-400">+62 813-1002-232</a>
+                </span>
+            </div>
+        </div>
+
+        <div class="contact-box" data-aos="fade-up" data-aos-delay="200">
+            <div class="contact-item">
+                <span class="contact-label">Nama</span>
+                <span class="contact-value">BP FAKHRUDIN</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">WhatsApp</span>
+                <span class="contact-value">
+                    <a href="https://wa.me/6281239746692" target="_blank" class="hover:text-cyan-400">+62 812-3974-6692</a>
+                </span>
+            </div>
+        </div>
+
+        <div class="contact-box border-cyan-500/30" data-aos="fade-up" data-aos-delay="300">
+            <div class="contact-item">
+                <span class="contact-label">Official Inquiry</span>
+                <span class="contact-value text-cyan-400">ADMIN AMDF</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Direct Email</span>
+                <span class="contact-value">
+                    <a href="mailto:admin@bos-ww.online" style="word-break: break-word;">admin@bos-ww.online</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-10 p-6 text-center border border-dashed rounded-2xl" style="border-color: var(--border);" data-aos="fade-up" data-aos-delay="400">
+        <p style="color: var(--text-muted);"><strong>Keterangan:</strong> Serious Investor Only</p>
+    </div>
+</section>
+
+<footer>
+    CONFIDENTIAL INVESTOR DECK • Legal Audit File • MERR Surabaya | By AMDF
 </footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 1000, once: true });
+    // Initialize AOS
+    AOS.init({
+        once: false,
+        mirror: true,
+        duration: 800,
+        easing: 'ease-out-cubic'
+    });
 
-    function toggleTheme() {
-        document.body.classList.toggle('light-mode');
-    }
-
-    // Canvas Background Particles
+    // Interactive 3D Canvas Background Effect
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resize() {
+    
+    function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resize);
-    resize();
-
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    let particles = [];
+    const PARTICLE_COUNT = 80;
+    
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.3;
+            this.opacity = Math.random() * 0.3 + 0.1;
         }
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
-            if (this.x > canvas.width) this.x = 0;
             if (this.x < 0) this.x = canvas.width;
-            if (this.y > canvas.height) this.y = 0;
+            if (this.x > canvas.width) this.x = 0;
             if (this.y < 0) this.y = canvas.height;
+            if (this.y > canvas.height) this.y = 0;
         }
         draw() {
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary');
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            const gradient = ctx.createLinearGradient(this.x, this.y, this.x + 10, this.y + 10);
+            gradient.addColorStop(0, '#00F5FF');
+            gradient.addColorStop(1, '#6D5DFB');
+            ctx.fillStyle = gradient;
+            ctx.globalAlpha = this.opacity;
             ctx.fill();
         }
     }
-
-    function init() {
-        for (let i = 0; i < 80; i++) particles.push(new Particle());
+    
+    function initParticles() {
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            particles.push(new Particle());
+        }
     }
-
-    function animate() {
+    
+    let connectionLines = [];
+    function updateConnections() {
+        connectionLines = [];
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < 150) {
+                    connectionLines.push({
+                        start: { x: particles[i].x, y: particles[i].y },
+                        end: { x: particles[j].x, y: particles[j].y },
+                        opacity: 1 - distance / 150
+                    });
+                }
+            }
+        }
+    }
+    
+    function animateParticles() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
+        for (let p of particles) {
             p.update();
             p.draw();
-        });
-        requestAnimationFrame(animate);
+        }
+        updateConnections();
+        for (let line of connectionLines) {
+            ctx.beginPath();
+            ctx.moveTo(line.start.x, line.start.y);
+            ctx.lineTo(line.end.x, line.end.y);
+            ctx.strokeStyle = `rgba(0, 245, 255, ${line.opacity * 0.2})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+        }
+        requestAnimationFrame(animateParticles);
     }
-
-    init();
-    animate();
+    
+    initParticles();
+    animateParticles();
+    
+    // Add floating particles (background glow dots)
+    function createFloatingParticles() {
+        for (let i = 0; i < 30; i++) {
+            const div = document.createElement('div');
+            div.classList.add('floating-particle');
+            const size = Math.random() * 4 + 1;
+            div.style.width = size + 'px';
+            div.style.height = size + 'px';
+            div.style.left = Math.random() * 100 + '%';
+            div.style.animationDuration = Math.random() * 15 + 10 + 's';
+            div.style.animationDelay = Math.random() * 10 + 's';
+            div.style.opacity = Math.random() * 0.2 + 0.05;
+            document.body.appendChild(div);
+        }
+    }
+    createFloatingParticles();
+    
+    function openPDF(path) {
+        // Fallback if PDF not exist, but open new tab
+        window.open(path, "_blank");
+    }
+    
+    function toggleMenu() {
+        const nav = document.getElementById('navLinks');
+        nav.classList.toggle('active');
+    }
+    
+    function toggleTheme() {
+        const body = document.body;
+        const icon = document.getElementById('theme-icon');
+        body.classList.toggle('light-mode');
+        
+        if(body.classList.contains('light-mode')) {
+            icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            icon.setAttribute('stroke', '#ffffff');
+        } else {
+            icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+            icon.setAttribute('stroke', '#050b14');
+        }
+        
+        // Update canvas colors dynamically
+        const isLight = body.classList.contains('light-mode');
+        const canvasBg = document.getElementById('bg-canvas');
+        if (canvasBg) {
+            // Just trigger repaint
+            canvasBg.style.opacity = isLight ? '0.3' : '0.5';
+        }
+    }
+    
+    // Smooth scroll for navbar links
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    
+    // Parallax effect on hero image
+    window.addEventListener('scroll', () => {
+        const heroImg = document.querySelector('.hero-image');
+        if (heroImg) {
+            const scrolled = window.pageYOffset;
+            heroImg.style.transform = `translateY(${scrolled * 0.05}px)`;
+        }
+    });
 </script>
 
 </body>
