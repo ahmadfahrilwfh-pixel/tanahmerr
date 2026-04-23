@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tanah Murah di Surabaya Timur | Beli Tanah Murah di Surabaya Timur MERR</title>
-    <meta name="description" content="Investasi tanah murah di Surabaya Timur kawasan MERR. Aset premium dengan legalitas inkracht, perlindungan institusional, dan potensi pengembangan bernilai tinggi.">
-    <meta name="keywords" content="tanah murah di surabaya timur, jual tanah surabaya, investasi tanah merr, lahan komersial surabaya, tanah strategis surabaya timur">
-    <meta name="author" content="AMDF">
-
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <title>Tanah Murah di Surabaya Timur | Ahmad Fahril Portfolio</title>
+    <meta name="description" content="Investasi tanah murah di Surabaya Timur kawasan MERR. Aset premium dengan legalitas inkracht.">
+    <meta name="author" content="Ahmad Fahril">
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
@@ -26,11 +21,8 @@
             --text-main: #ffffff;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
-            --nav-bg: rgba(5, 11, 20, 0.95);
-            --gradient-1: rgba(0, 245, 255, 0.05);
-            --gradient-2: rgba(109, 93, 251, 0.05);
-            --btn-hover: rgba(255,255,255,0.05);
-            --btn-text: #ffffff;
+            --nav-bg: rgba(5, 11, 20, 0.85);
+            --accent-glow: rgba(0, 245, 255, 0.3);
         }
 
         .light-mode {
@@ -41,405 +33,260 @@
             --text-main: #0f172a;
             --text-muted: #475569;
             --border: rgba(0, 0, 0, 0.1);
-            --nav-bg: rgba(248, 250, 252, 0.95);
-            --gradient-1: rgba(0, 129, 138, 0.05);
-            --gradient-2: rgba(74, 58, 255, 0.05);
-            --btn-hover: rgba(0,0,0,0.05);
-            --btn-text: #0f172a;
+            --nav-bg: rgba(248, 250, 252, 0.85);
+            --accent-glow: rgba(0, 129, 138, 0.2);
         }
 
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+            transition: background-color 0.4s, color 0.4s;
         }
 
-        html { scroll-behavior: smooth; }
-
         body {
-            background: 
-                radial-gradient(circle at 10% 20%, var(--gradient-1) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, var(--gradient-2) 0%, transparent 50%),
-                var(--bg-body);
+            background-color: var(--bg-body);
             color: var(--text-main);
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* --- Animations --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Animated Background */
+        #bg-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.5;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .navbar {
+            width: 100%; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 0; z-index: 999; backdrop-filter: blur(15px);
+            background: var(--nav-bg); border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: -1px; }
+        .logo span { color: var(--primary); text-shadow: 0 0 10px var(--accent-glow); }
+
+        .nav-links a {
+            color: var(--text-muted); font-size: 13px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; margin-left: 25px;
+            position: relative;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Animation */
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 68px); font-weight: 800; line-height: 1.1;
+            background: linear-gradient(135deg, var(--text-main) 60%, var(--primary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: titleShift 6s infinite alternate;
+        }
+
+        @keyframes titleShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(30deg); }
+        }
+
+        .doc-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 30px; padding: 15px; backdrop-filter: blur(10px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .doc-card:hover {
+            transform: translateY(-15px); border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.15);
         }
 
         .theme-switch {
             position: fixed; bottom: 30px; right: 30px; z-index: 1000;
-            width: 55px; height: 55px; border-radius: 50%;
+            width: 60px; height: 60px; border-radius: 50%;
             background: var(--primary); display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease;
-        }
-        .theme-switch:hover { transform: scale(1.1); }
-
-        .navbar {
-            width: 100%; padding: 20px 8%; display: flex; justify-content: space-between; align-items: center;
-            position: fixed; top: 0; z-index: 999; backdrop-filter: blur(20px);
-            background: var(--nav-bg); border-bottom: 1px solid var(--border);
+            cursor: pointer; box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-        .logo span { color: var(--primary); }
-
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a {
-            color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px; transition: .3s;
+        /* Contact Box Glow */
+        .contact-box {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 25px; padding: 35px; position: relative; overflow: hidden;
         }
-        .nav-links a:hover { color: var(--primary); }
+        .contact-box:hover { border-color: var(--primary); }
 
-        .menu-toggle { display: none; cursor: pointer; color: var(--text-main); }
-
-        section { padding: 140px 8% 80px; }
-
-        .tag {
-            display: inline-block; padding: 8px 16px; border-radius: 4px;
-            background: rgba(0,245,255,.1); border-left: 3px solid var(--primary);
-            color: var(--primary); font-size: 12px; font-weight: 700;
-            letter-spacing: 1.5px; margin-bottom: 25px;
-        }
-
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-
-        .hero h1 {
-            font-size: 68px; font-weight: 800; line-height: 1.1; margin-bottom: 25px;
-            letter-spacing: -2px; background: linear-gradient(to right, var(--text-main) 60%, var(--primary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .hero p { color: var(--text-muted); font-size: 18px; line-height: 1.8; margin-bottom: 40px; }
-
-        .hero-image {
-            height: 580px; border-radius: 40px;
-            background: url('img/tanah-utama.jpg') center/cover no-repeat;
-            position: relative; border: 1px solid var(--border);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .map-box { width: 100%; height: 450px; border-radius: 30px; overflow: hidden; border: 1px solid var(--border); margin-top: 40px; }
-
-        .section-title { font-size: 42px; font-weight: 700; margin-bottom: 20px; letter-spacing: -1px; }
-        .section-desc { color: var(--text-muted); line-height: 1.8; margin-bottom: 50px; font-size: 18px; max-width: 800px; }
-
-        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 30px; }
-        .doc-card {
-            background: var(--bg-card); border: 1px solid var(--border); border-radius: 30px; padding: 10px; cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
-        }
-        .doc-card:hover { transform: translateY(-12px); border-color: var(--primary); }
-        .doc-preview { width: 100%; height: 380px; object-fit: cover; border-radius: 22px; margin-bottom: 20px; }
-        .doc-content { padding: 15px 15px 25px; }
-        .doc-content h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
-        .doc-content p { color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 15px; }
-
-        .open-btn {
-            display: block; width: 100%; text-align: center; padding: 14px;
-            border-radius: 15px; background: var(--btn-hover);
-            border: 1px solid var(--border); color: var(--btn-text);
-            font-size: 14px; font-weight: 600; transition: .3s;
-        }
-        .doc-card:hover .open-btn { background: var(--primary); color: #fff; border-color: var(--primary); }
-
-        .contact-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px; 
-        }
-
-        .contact-box { 
-            padding: 30px; 
-            background: var(--bg-card); 
-            border: 1px solid var(--border); 
-            border-radius: 25px; 
-        }
-
-        .contact-item { 
-            padding: 15px 0; 
-            border-bottom: 1px solid var(--border); 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: space-between; 
-            align-items: center;
-            gap: 10px; 
-        }
-
-        @media (max-width: 480px) {
-            .contact-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .contact-value {
-                font-size: 16px;
-                word-break: break-all;
-            }
-        }
-
-        .contact-item:last-child { border: none; }
-        .contact-label { color: var(--text-muted); font-size: 13px; font-weight: 600; text-transform: uppercase; }
-        .contact-value { font-size: 18px; font-weight: 700; color: #fff; }
-
-        footer { padding: 60px 8%; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 13px; letter-spacing: 1px; }
-
-        /* RESPONSIVE */
         @media(max-width:1024px) {
-            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 48px; }
-            .menu-toggle { display: block; }
-            .nav-links { 
-                display: none; flex-direction: column; position: absolute; top: 80px; left: 0;
-                width: 100%; background: var(--nav-bg); padding: 30px 8%; border-bottom: 1px solid var(--border);
-            }
-            .nav-links.active { display: flex; gap: 20px; }
-        }
-
-        @media(max-width:600px) {
-            .contact-box { padding: 30px; }
-            .hero h1 { font-size: 38px; }
+            .nav-links { display: none; } /* Simplified for brevity, add mobile menu as needed */
         }
     </style>
 </head>
 <body>
 
-<div class="theme-switch" onclick="toggleTheme()" title="Ganti Tema">
-    <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#050b14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<canvas id="bg-canvas"></canvas>
+
+<div class="theme-switch" onclick="toggleTheme()">
+    <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#050b14" stroke-width="2">
         <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
     </svg>
 </div>
 
-<div class="navbar">
+<nav class="navbar">
     <div class="logo">MERR<span>PORTFOLIO</span></div>
-    
-    <div class="menu-toggle" onclick="toggleMenu()">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+    <div class="nav-links">
+        <a href="#summary">Summary</a>
+        <a href="#legal">Legal</a>
+        <a href="#contact">Contact</a>
     </div>
+</nav>
 
-    <div class="nav-links" id="navLinks">
-        <a href="#summary" onclick="toggleMenu()">Executive Summary</a>
-        <a href="#location" onclick="toggleMenu()">Location</a>
-        <a href="#legal" onclick="toggleMenu()">Legal</a>
-        <a href="#protection" onclick="toggleMenu()">Protection</a>
-        <a href="#contact" onclick="toggleMenu()">Contact</a>
-    </div>
-</div>
-
-<section class="hero">
-    <div class="hero-grid">
-        <div class="reveal">
-            <div class="tag">PREMIUM INVESTOR DECK</div>
+<section class="pt-40 px-[8%] pb-20">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div data-aos="fade-right">
+            <div class="inline-block px-4 py-2 rounded-full border border-cyan-500/50 text-cyan-400 text-[10px] font-bold tracking-widest mb-6">
+                PREMIUM INVESTOR DECK
+            </div>
             <h1>Investasi Lahan Strategis MERR Surabaya</h1>
-            <p>
-                Amankan aset premium di pusat pertumbuhan ekonomi Surabaya Timur. Kesempatan langka mengakuisisi lahan strategis MERR dengan legalitas <i>inkracht</i> dan perlindungan institusional penuh. Aset ini adalah peluang investasi terbaik yang siap untuk <strong>due diligence</strong> Anda hari ini.
+            <p class="text-slate-400 text-lg mt-6 mb-10 leading-relaxed">
+                Amankan aset premium di pusat pertumbuhan ekonomi Surabaya Timur. Kesempatan langka dengan legalitas inkracht dan perlindungan institusional penuh.
             </p>
             <div class="flex gap-4">
-                <a href="#contact" class="px-8 py-4 bg-cyan-500 text-black font-bold rounded-xl hover:bg-white transition-all">Hubungi Kami</a>
-                <a href="#legal" class="px-8 py-4 border border-gray-400 rounded-xl hover:bg-gray-100/10 transition-all">Lihat Dokumen</a>
+                <a href="#contact" class="px-8 py-4 bg-cyan-500 text-black font-bold rounded-xl hover:shadow-[0_0_20px_rgba(0,245,255,0.5)] transition-all">Hubungi Kami</a>
+                <a href="#legal" class="px-8 py-4 border border-slate-600 rounded-xl hover:bg-white/5 transition-all">Lihat Dokumen</a>
             </div>
         </div>
-        <div class="hero-image reveal"></div>
-    </div>
-</section>
-
-<section id="summary" class="reveal">
-    <div class="tag">EXECUTIVE SUMMARY</div>
-    <h2 class="section-title">Legal Audit File yang Kuat</h2>
-    <p class="section-desc">
-        Data yang dimiliki bukan sekadar kumpulan dokumen, melainkan sebuah
-        rangkaian bukti hukum yang saling terhubung mulai dari putusan pengadilan,
-        proses eksekusi resmi, perlindungan institusional negara, validitas transaksi,
-        hingga finalisasi administratif di BPN dan Bapenda.
-    </p>
-</section>
-
-<section id="location" style="background: var(--gradient-1)" class="reveal">
-    <div class="tag">VISUALISASI LOKASI</div>
-    <h2 class="section-title">Posisi Strategis Aset</h2>
-    <p class="section-desc">Visualisasi area MERR (Middle East Ring Road) Surabaya. Titik pusat pertumbuhan ekonomi baru.</p>
-    <div class="map-box">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5!2d112.78!3d-7.3!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMTgnMDAuMCJTIDExMsKwNDYnNDguMCJF!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-</section>
-
-<section id="legal">
-    <div class="tag reveal">FONDASI HUKUM</div>
-    <h2 class="section-title reveal">Dokumen Inti Investasi</h2>
-    <p class="section-desc reveal">Klik pada kartu untuk membuka berkas PDF asli.</p>
-
-    <div class="doc-grid">
-        <div class="doc-card reveal" onclick="openPDF('pdf/putusan-pn.pdf')">
-            <img src="preview/putusan-preview.jpg" class="doc-preview" alt="Preview Putusan PN">
-            <div class="doc-content">
-                <h3>Putusan PN Surabaya</h3>
-                <p>Putusan PN No. 728/Pdt.G/2018 dengan status Inkracht. Hak telah diakui negara secara final.</p>
-                <span class="open-btn">Buka Berkas Digital</span>
-            </div>
-        </div>
-
-        <div class="doc-card reveal" onclick="openPDF('pdf/amaning.pdf')">
-            <img src="preview/amaning-preview.jpg" class="doc-preview" alt="Preview Amaning">
-            <div class="doc-content">
-                <h3>Penetapan Amaning</h3>
-                <p>Penetapan No. 43.EKS.2019 membuktikan proses pengosongan lahan berjalan resmi.</p>
-                <span class="open-btn">Buka Berkas Digital</span>
-            </div>
+        <div class="h-[500px] rounded-[40px] bg-slate-800 border border-white/10 overflow-hidden shadow-2xl" data-aos="zoom-in">
+            <div class="w-full h-full bg-cover bg-center opacity-80" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?q=80');"></div>
         </div>
     </div>
 </section>
 
-<section id="protection">
-    <div class="tag reveal">PROTEKSI NEGARA</div>
-    <h2 class="section-title reveal">Pengawasan Institusional</h2>
+<section id="legal" class="px-[8%] py-20">
+    <h2 class="text-4xl font-bold mb-4" data-aos="fade-up">Dokumen Inti Investasi</h2>
+    <p class="text-slate-400 mb-12" data-aos="fade-up" data-aos-delay="100">Berkas hukum utama yang menjamin keamanan investasi Anda.</p>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="doc-card" data-aos="fade-up" data-aos-delay="200" onclick="window.open('pdf/putusan-pn.pdf')">
+            <div class="h-64 bg-slate-700 rounded-2xl mb-6 overflow-hidden">
+                <img src="preview/putusan-preview.jpg" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold mb-3">Putusan PN Surabaya</h3>
+            <p class="text-sm text-slate-400 mb-6">Putusan PN No. 728/Pdt.G/2018 status Inkracht. Hak telah diakui negara.</p>
+            <div class="w-full py-3 rounded-xl bg-white/5 text-center text-xs font-bold border border-white/5">BUKA DOKUMEN</div>
+        </div>
 
-    <div class="doc-grid">
-        <div class="doc-card reveal" onclick="openPDF('pdf/dukungan-polri.pdf')">
-            <img src="preview/polri-preview.jpg" class="doc-preview" alt="Preview Polri">
-            <div class="doc-content">
-                <h3>Mabes Polri</h3>
-                <p>Dukungan perlindungan penting terhadap risiko gangguan pihak luar.</p>
-                <span class="open-btn">Buka Berkas Digital</span>
+        <div class="doc-card" data-aos="fade-up" data-aos-delay="300" onclick="window.open('pdf/amaning.pdf')">
+            <div class="h-64 bg-slate-700 rounded-2xl mb-6 overflow-hidden">
+                <img src="preview/amaning-preview.jpg" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold mb-3">Penetapan Amaning</h3>
+            <p class="text-sm text-slate-400 mb-6">Penetapan No. 43.EKS.2019 proses pengosongan lahan resmi pengadilan.</p>
+            <div class="w-full py-3 rounded-xl bg-white/5 text-center text-xs font-bold border border-white/5">BUKA DOKUMEN</div>
+        </div>
+
+        <div class="doc-card" data-aos="fade-up" data-aos-delay="400" onclick="window.open('pdf/dukungan-polri.pdf')">
+            <div class="h-64 bg-slate-700 rounded-2xl mb-6 overflow-hidden">
+                <img src="preview/polri-preview.jpg" class="w-full h-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold mb-3">Mabes Polri & MA</h3>
+            <p class="text-sm text-slate-400 mb-6">Perlindungan institusional terhadap risiko gangguan mafia tanah.</p>
+            <div class="w-full py-3 rounded-xl bg-white/5 text-center text-xs font-bold border border-white/5">BUKA DOKUMEN</div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="px-[8%] py-20 bg-cyan-500/5">
+    <div class="max-w-4xl mx-auto text-center mb-16">
+        <h2 class="text-4xl font-bold mb-6" data-aos="fade-up">Diskusi Strategis</h2>
+        <p class="text-slate-400" data-aos="fade-up">Hubungi tim administrasi untuk verifikasi dokumen dan site visit.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="contact-box" data-aos="fade-right">
+            <div class="text-[10px] text-cyan-400 font-black tracking-tighter mb-4 uppercase">Representative One</div>
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-2xl font-bold">BP WAWAN</div>
+                    <div class="text-slate-500 text-sm mt-1">+62 813-1002-232</div>
+                </div>
+                <a href="https://wa.me/628131002232" class="p-4 bg-cyan-500 rounded-full text-black">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.438-9.89 9.886-.001 2.15.633 3.557 1.623 5.256l-1.079 3.946 4.046-1.061z"/></svg>
+                </a>
             </div>
         </div>
 
-        <div class="doc-card reveal" onclick="openPDF('pdf/ijb.pdf')">
-            <img src="preview/ijb-preview.jpg" class="doc-preview" alt="Preview IJB">
-            <div class="doc-content">
-                <h3>IJB Notariil</h3>
-                <p>Perikatan jual beli memperkuat legal standing dan profesionalisme transaksi.</p>
-                <span class="open-btn">Buka Berkas Digital</span>
-            </div>
-        </div>
-
-        <div class="doc-card reveal" onclick="openPDF('pdf/bapenda.pdf')">
-            <img src="preview/bapenda-preview.jpg" class="doc-preview" alt="Preview Bapenda">
-            <div class="doc-content">
-                <h3>Bapenda</h3>
-                <p>Progres administrasi perpajakan berjalan lancar sebagai bentuk transparansi.</p>
-                <span class="open-btn">Buka Berkas Digital</span>
-            </div>
-        </div>
-
-        <div class="doc-card reveal" onclick="openPDF('pdf/bpn.pdf')">
-            <img src="preview/bpn-preview.jpg" class="doc-preview" alt="Preview BPN">
-            <div class="doc-content">
-                <h3>Finalisasi BPN</h3>
-                <p>Tahap validasi batas lahan dan sertifikasi formal sedang berjalan.</p>
-                <span class="open-btn">Buka Berkas Digital</span>
+        <div class="contact-box" data-aos="fade-left">
+            <div class="text-[10px] text-cyan-400 font-black tracking-tighter mb-4 uppercase">Representative Two</div>
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="text-2xl font-bold">BP FAKHRUDIN</div>
+                    <div class="text-slate-500 text-sm mt-1">+62 812-3974-6692</div>
+                </div>
+                <a href="https://wa.me/6281239746692" class="p-4 bg-cyan-500 rounded-full text-black">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.438-9.89 9.886-.001 2.15.633 3.557 1.623 5.256l-1.079 3.946 4.046-1.061z"/></svg>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<section id="contact" class="reveal">
-    <div class="tag">CONTACT PERSON</div>
-    <h2 class="section-title">Diskusi Strategis & Due Diligence</h2>
-
-    <div class="contact-grid">
-        <div class="contact-box">
-            <div class="contact-item">
-                <span class="contact-label">Nama</span>
-                <span class="contact-value">BP WAWAN</span>
-            </div>
-            <div class="contact-item">
-                <span class="contact-label">WhatsApp</span>
-                <span class="contact-value">
-                    <a href="https://wa.me/628131002232" target="_blank" class="hover:text-cyan-400">+62 813-1002-232</a>
-                </span>
-            </div>
-        </div>
-
-        <div class="contact-box border-cyan-500/30">
-            <div class="contact-item">
-                <span class="contact-label">Official Inquiry</span>
-                <span class="contact-value text-cyan-400">ADMIN AMDF</span>
-            </div>
-            <div class="contact-item">
-                <span class="contact-label">Email</span>
-                <span class="contact-value">
-                    <a href="mailto:admin@bos-ww.online">admin@bos-ww.online</a>
-                </span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer>
-    CONFIDENTIAL INVESTOR DECK • Legal Audit File • MERR Surabaya | By AMDF
+<footer class="py-10 text-center text-slate-500 text-[10px] tracking-[4px] border-t border-white/5 uppercase">
+    Copyright © 2026 Ahmad Fahril • Confidential Investor Deck • MERR Surabaya
 </footer>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    // --- PDF Handler ---
-    function openPDF(path){ 
-        if(path) {
-            window.open(path, "_blank"); 
-        } else {
-            alert("File tidak ditemukan.");
-        }
-    }
+    AOS.init({ duration: 1000, once: true });
 
-    // --- Navbar Toggle ---
-    function toggleMenu() {
-        const nav = document.getElementById('navLinks');
-        nav.classList.toggle('active');
-    }
-
-    // --- Theme Switcher ---
     function toggleTheme() {
-        const body = document.body;
-        const icon = document.getElementById('theme-icon');
-        body.classList.toggle('light-mode');
-        
-        if(body.classList.contains('light-mode')) {
-            icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-            icon.setAttribute('stroke', '#ffffff');
-        } else {
-            icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
-            icon.setAttribute('stroke', '#050b14');
+        document.body.classList.toggle('light-mode');
+    }
+
+    // Canvas Background Particles
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2;
+            this.speedX = Math.random() * 0.5 - 0.25;
+            this.speedY = Math.random() * 0.5 - 0.25;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
+        draw() {
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
         }
     }
 
-    // --- Animation Scroll Reveal ---
-    const observerOptions = {
-        threshold: 0.1
-    };
+    function init() {
+        for (let i = 0; i < 80; i++) particles.push(new Particle());
+    }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
         });
-    }, observerOptions);
+        requestAnimationFrame(animate);
+    }
 
-    document.querySelectorAll('.reveal').forEach((el) => {
-        observer.observe(el);
-    });
+    init();
+    animate();
 </script>
 
 </body>
